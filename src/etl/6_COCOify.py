@@ -70,8 +70,8 @@ def COCOify(folds_df,
     #
     if pos_only: 
         train_df = train_df[train_df["class"] == "Lung Opacity"]
-    all_train_images = [os.path.join(TRAIN_IMAGES_DIR, "{}.png".format(_)) for _ in train_df.patientId][:100]  # debugging 
-    all_valid_images = [os.path.join(TRAIN_IMAGES_DIR, "{}.png".format(_)) for _ in valid_df.patientId][:100]  # debugging 
+    all_train_images = [os.path.join(TRAIN_IMAGES_DIR, "{}.png".format(_)) for _ in train_df.patientId][:1000]  # debugging 
+    all_valid_images = [os.path.join(TRAIN_IMAGES_DIR, "{}.png".format(_)) for _ in valid_df.patientId][:1000]  # debugging 
     #
     # == TRAIN == # 
     rsna_train = {} 
