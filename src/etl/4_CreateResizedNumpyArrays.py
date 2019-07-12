@@ -66,20 +66,22 @@ def pad_image(img, size, smooth=None):
   Arguments:
     - smooth (float/None) : sigma value for Gaussian smoothing
     """
-    if np.max(img.shape) > size: 
     resize_factor = float(size) / np.max(img.shape)
-    # Linear interpolation 
-    resized_img = zoom(img, resize_factor, order=1, prefilter=False)
-    else: 
-    resized_img = img.copy()
+    if resize_factor > 1: 
+        # Cubic spline interpolation
+        resized_img = zoom(img, resize_factor)
+    else:
+        # Linear interpolation 
+        resized_img = zoom(img, resize_factor, order=1, prefilter=False)
     if smooth is not None: 
-    resized_img = gaussian_filter(resized_img, sigma=smooth) 
-    l = resized_img.shape[0] ; w = resized_img.shape[1]   
-    ldiff = (size-l) / 2 
-    wdiff = (size-w) / 2
-    pad_list = [(ldiff, size-l-ldiff), (wdiff, size-w-wdiff)] 
-    resized_img = np.pad(resized_img, pad_list, "constant", 
-                       constant_values=0)
+        resized_img = gaussian_filter(resized_img, sigma=smooth) 
+        l = resized_img.shape[0] ; w = resized_img.shape[1] 
+    if l != w: 
+        ldiff = (size-l) / 2 
+        wdiff = (size-w) / 2
+        pad_list = [(ldiff, size-l-ldiff), (wdiff, size-w-wdiff)] 
+        resized_img = np.pad(resized_img, pad_list, "constant", 
+                             constant_values=0)
     assert size == resized_img.shape[0] == resized_img.shape[1]
     return resized_img.astype("uint8")
 
