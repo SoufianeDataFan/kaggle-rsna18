@@ -11,3 +11,5 @@ mv stage_2_train_labels.csv train_labels.csv
 mkdir train_dicoms test_dicoms 
 cd train_dicoms ; unzip -qq ../stage_2_train_images.zip 
 cd ../test_dicoms ; unzip -qq ../stage_2_test_images.zip 
+
+echo "get_started.sh  is finised .........."
