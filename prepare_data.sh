@@ -1,3 +1,5 @@
+echo "Running src/etl/0_Stage1Filter.py  ..."
+python src/etl/0_Stage1Filter.py
 echo "Extracting metadata from DICOM Files ..."
 python src/etl/1_GetMetadata.py
 echo "Creating stratified 10-fold cross-validation ..."
