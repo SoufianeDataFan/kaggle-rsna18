@@ -34,7 +34,7 @@ list_of_test_dicoms  = glob.glob(os.path.join(test_dicoms_dir, "*"))
 
 
 train_metadata = pd.DataFrame() 
-for i, each_train_dicom in enumerate(list_of_train_dicoms[:1]): 
+for i, each_train_dicom in enumerate(list_of_train_dicoms): 
     sys.stdout.write("Getting metadata: {}/{} ...\r".format(i+1, len(list_of_train_dicoms)))
     sys.stdout.flush() 
     tmp_dicom = pydicom.read_file(each_train_dicom)
