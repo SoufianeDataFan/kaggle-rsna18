@@ -22,31 +22,31 @@ from skimage import exposure, io
 #############
 
 def resize_image(img, size, smooth=None):
-  """
+    """
   Resizes image to new_length x new_length and pads with black. 
   Only works with grayscale right now. 
 
   Arguments:
     - smooth (float/None) : sigma value for Gaussian smoothing
   """
-  resize_factor = float(size) / np.max(img.shape)
-  if resize_factor > 1: 
-    # Cubic spline interpolation
-    resized_img = zoom(img, resize_factor)
-  else:
-    # Linear interpolation 
-    resized_img = zoom(img, resize_factor, order=1, prefilter=False)
-  if smooth is not None: 
-    resized_img = gaussian_filter(resized_img, sigma=smooth) 
-  l = resized_img.shape[0] ; w = resized_img.shape[1] 
-  if l != w: 
-    ldiff = (size-l) / 2 
-    wdiff = (size-w) / 2
-    pad_list = [(ldiff, size-l-ldiff), (wdiff, size-w-wdiff)] 
-    resized_img = np.pad(resized_img, pad_list, "constant", 
-                         constant_values=0)
-  assert size == resized_img.shape[0] == resized_img.shape[1]
-  return resized_img.astype("uint8")
+    resize_factor = float(size) / np.max(img.shape)
+    if resize_factor > 1: 
+        # Cubic spline interpolation
+        resized_img = zoom(img, resize_factor)
+    else:
+        # Linear interpolation 
+        resized_img = zoom(img, resize_factor, order=1, prefilter=False)
+    if smooth is not None: 
+        resized_img = gaussian_filter(resized_img, sigma=smooth) 
+        l = resized_img.shape[0] ; w = resized_img.shape[1] 
+    if l != w: 
+        ldiff = (size-l) / 2 
+        wdiff = (size-w) / 2
+        pad_list = [(ldiff, size-l-ldiff), (wdiff, size-w-wdiff)] 
+        resized_img = np.pad(resized_img, pad_list, "constant", 
+                             constant_values=0)
+    assert size == resized_img.shape[0] == resized_img.shape[1]
+    return resized_img.astype("uint8")
 
 def resize_images_and_save_as_nparray(list_of_images, in_dir, out_dir, new_size=256):
     if not os.path.exists(out_dir): os.makedirs(out_dir)
@@ -59,29 +59,29 @@ def resize_images_and_save_as_nparray(list_of_images, in_dir, out_dir, new_size=
         np.save(os.path.join(out_dir, img.replace("png", "npy")), resized_img) 
 
 def pad_image(img, size, smooth=None):
-  """
+    """
   Pads image to new_length x new_length and pads with black. 
   Only works with grayscale right now. 
 
   Arguments:
     - smooth (float/None) : sigma value for Gaussian smoothing
-  """
-  if np.max(img.shape) > size: 
+    """
+    if np.max(img.shape) > size: 
     resize_factor = float(size) / np.max(img.shape)
     # Linear interpolation 
     resized_img = zoom(img, resize_factor, order=1, prefilter=False)
-  else: 
+    else: 
     resized_img = img.copy()
-  if smooth is not None: 
+    if smooth is not None: 
     resized_img = gaussian_filter(resized_img, sigma=smooth) 
-  l = resized_img.shape[0] ; w = resized_img.shape[1]   
-  ldiff = (size-l) / 2 
-  wdiff = (size-w) / 2
-  pad_list = [(ldiff, size-l-ldiff), (wdiff, size-w-wdiff)] 
-  resized_img = np.pad(resized_img, pad_list, "constant", 
+    l = resized_img.shape[0] ; w = resized_img.shape[1]   
+    ldiff = (size-l) / 2 
+    wdiff = (size-w) / 2
+    pad_list = [(ldiff, size-l-ldiff), (wdiff, size-w-wdiff)] 
+    resized_img = np.pad(resized_img, pad_list, "constant", 
                        constant_values=0)
-  assert size == resized_img.shape[0] == resized_img.shape[1]
-  return resized_img.astype("uint8")
+    assert size == resized_img.shape[0] == resized_img.shape[1]
+    return resized_img.astype("uint8")
 
 def pad_images_and_save_as_nparray(list_of_images, in_dir, out_dir, new_size=256):
     if not os.path.exists(out_dir): os.makedirs(out_dir)
