@@ -20,11 +20,21 @@ with open(os.path.join(WDIR, "../../SETTINGS.json")) as f:
 train_dicoms_dir = os.path.join(WDIR, "../../", SETTINGS_JSON["RAW_TRAIN_DICOMS_DIR"])
 test_dicoms_dir  = os.path.join(WDIR, "../../", SETTINGS_JSON["RAW_TEST_DICOMS_DIR"])
 
-list_of_train_dicoms = glob.glob(os.path.join(train_dicoms_dir, "*"))
-list_of_test_dicoms  = glob.glob(os.path.join(test_dicoms_dir, "*"))
+# list_of_train_dicoms = glob.glob(os.path.join(train_dicoms_dir, "*"))
+# list_of_test_dicoms  = glob.glob(os.path.join(test_dicoms_dir, "*"))
+##########
+# DEBUG # 
+##########
+
+list_of_train_dicoms = glob.glob(os.path.join(train_dicoms_dir, "*"))[:100]
+list_of_test_dicoms  = glob.glob(os.path.join(test_dicoms_dir, "*"))[:100]
+##########
+
+
+
 
 train_metadata = pd.DataFrame() 
-for i, each_train_dicom in enumerate(list_of_train_dicoms): 
+for i, each_train_dicom in enumerate(list_of_train_dicoms[:1]): 
     sys.stdout.write("Getting metadata: {}/{} ...\r".format(i+1, len(list_of_train_dicoms)))
     sys.stdout.flush() 
     tmp_dicom = pydicom.read_file(each_train_dicom)
