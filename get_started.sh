@@ -1,4 +1,4 @@
-cd $TOP/models/RetinaNet/ ; pip install .
+cd models/RetinaNet/ ; pip install .
 
 
 cd -
