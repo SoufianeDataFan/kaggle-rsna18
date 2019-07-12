@@ -1,3 +1,4 @@
+sudo chmod -R 777 ~/kaggle-rsna18/
 cd models/RetinaNet/ ; pip install .
 cd -
 mkdir data ; cd data 
