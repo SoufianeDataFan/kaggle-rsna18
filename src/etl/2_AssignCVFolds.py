@@ -57,6 +57,6 @@ df = labels_df.merge(metadata, on="patientId")
 print('shape of df is .............{}'.format(df.shape))
 
 df["combined_cat"] = ["{}_{}_{}_{}".format(row["class"], row.age_category, row.sex, row["view"]) for rownum, row in df.iterrows()]
-folds_df = assign_folds(df, 5)
+folds_df = assign_folds(df, 10)
 
 folds_df.to_csv(os.path.join(WDIR, "../../", SETTINGS_JSON["TRAIN_INFO_DIR"], "stratified_folds_df.csv"))
