@@ -25,7 +25,6 @@ def resize_image(img, size, smooth=None):
     """
   Resizes image to new_length x new_length and pads with black. 
   Only works with grayscale right now. 
-
   Arguments:
     - smooth (float/None) : sigma value for Gaussian smoothing
   """
@@ -38,7 +37,7 @@ def resize_image(img, size, smooth=None):
         resized_img = zoom(img, resize_factor, order=1, prefilter=False)
     if smooth is not None: 
         resized_img = gaussian_filter(resized_img, sigma=smooth) 
-        l = resized_img.shape[0] ; w = resized_img.shape[1] 
+    l = resized_img.shape[0] ; w = resized_img.shape[1] 
     if l != w: 
         ldiff = (size-l) / 2 
         wdiff = (size-w) / 2
@@ -62,7 +61,6 @@ def pad_image(img, size, smooth=None):
     """
   Pads image to new_length x new_length and pads with black. 
   Only works with grayscale right now. 
-
   Arguments:
     - smooth (float/None) : sigma value for Gaussian smoothing
     """
@@ -75,7 +73,7 @@ def pad_image(img, size, smooth=None):
         resized_img = zoom(img, resize_factor, order=1, prefilter=False)
     if smooth is not None: 
         resized_img = gaussian_filter(resized_img, sigma=smooth) 
-        l = resized_img.shape[0] ; w = resized_img.shape[1] 
+    l = resized_img.shape[0] ; w = resized_img.shape[1] 
     if l != w: 
         ldiff = (size-l) / 2 
         wdiff = (size-w) / 2
