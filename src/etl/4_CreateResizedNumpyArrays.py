@@ -89,6 +89,8 @@ def pad_images_and_save_as_nparray(list_of_images, in_dir, out_dir, new_size=256
     for index, img in enumerate(list_of_images): 
         sys.stdout.write("Resizing {}/{} ...\r".format(index+1, num_images))
         sys.stdout.flush()
+        in_dir= str(in_dir)
+        img= img.decode('ascii')
         loaded_img = scipy.misc.imread(os.path.join(in_dir, img), mode="L")
         resized_img = pad_image(loaded_img, new_size) 
         np.save(os.path.join(out_dir, img.split(".")[0]+".npy"), resized_img) 
