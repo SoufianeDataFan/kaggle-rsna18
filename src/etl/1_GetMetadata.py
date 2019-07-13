@@ -1,6 +1,9 @@
 ###########
 # IMPORTS #
 ###########
+import warnings
+warnings.filterwarnings("ignore")
+
 import pandas as pd
 import scipy.misc 
 import pydicom 
