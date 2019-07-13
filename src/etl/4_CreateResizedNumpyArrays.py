@@ -1,6 +1,8 @@
 ###########
 # IMPORTS #
 ###########
+import warnings
+warnings.filterwarnings("ignore")
 
 import numpy as np 
 import scipy.misc 
@@ -9,6 +11,7 @@ import sys
 import os, json 
 
 WDIR = os.path.dirname(os.path.abspath(__file__))
+
 
 with open(os.path.join(WDIR, "../../SETTINGS.json")) as f: 
     SETTINGS_JSON = json.load(f)  
@@ -53,6 +56,9 @@ def resize_images_and_save_as_nparray(list_of_images, in_dir, out_dir, new_size=
     for index, img in enumerate(list_of_images): 
         sys.stdout.write("Resizing {}/{} ...\r".format(index+1, num_images))
         sys.stdout.flush()
+        in_dir= str(in_dir)
+        img= img.decode('ascii')
+        print(os.path.join(in_dir, img))
         loaded_img = scipy.misc.imread(os.path.join(in_dir, img), mode="L")
         resized_img = resize_image(loaded_img, new_size) 
         np.save(os.path.join(out_dir, img.replace("png", "npy")), resized_img) 
@@ -83,18 +89,18 @@ def pad_image(img, size, smooth=None):
     assert size == resized_img.shape[0] == resized_img.shape[1]
     return resized_img.astype("uint8")
 
+
 def pad_images_and_save_as_nparray(list_of_images, in_dir, out_dir, new_size=256):
     if not os.path.exists(out_dir): os.makedirs(out_dir)
     num_images = len(list_of_images)  
     for index, img in enumerate(list_of_images): 
         sys.stdout.write("Resizing {}/{} ...\r".format(index+1, num_images))
         sys.stdout.flush()
-        in_dir= str(in_dir)
-        img= img.decode('ascii')
         loaded_img = scipy.misc.imread(os.path.join(in_dir, img), mode="L")
         resized_img = pad_image(loaded_img, new_size) 
         np.save(os.path.join(out_dir, img.split(".")[0]+".npy"), resized_img) 
-
+        
+        
 ##########
 # SCRIPT #
 ##########
@@ -103,6 +109,7 @@ in_dir  = os.path.join(WDIR, "../../", SETTINGS_JSON["TRAIN_IMAGES_CLEAN_DIR"], 
 
 out_dir = os.path.join(WDIR, "../../", SETTINGS_JSON["TRAIN_IMAGES_CLEAN_DIR"], "resized/i256/")
 list_of_images = subprocess.check_output("ls " + in_dir, shell=True).split() 
+# print(list_of_images)
 resize_images_and_save_as_nparray(list_of_images, in_dir, out_dir, 256)
 
 out_dir = os.path.join(WDIR, "../../", SETTINGS_JSON["TRAIN_IMAGES_CLEAN_DIR"], "resized/i320/")
@@ -120,4 +127,3 @@ resize_images_and_save_as_nparray(list_of_images, in_dir, out_dir, 448)
 out_dir = os.path.join(WDIR, "../../", SETTINGS_JSON["TRAIN_IMAGES_CLEAN_DIR"], "resized/i512/")
 list_of_images = subprocess.check_output("ls " + in_dir, shell=True).split() 
 resize_images_and_save_as_nparray(list_of_images, in_dir, out_dir, 512)
-
