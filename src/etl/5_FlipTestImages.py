@@ -13,7 +13,7 @@ FLIP_IMAGES_DIR = os.path.join(WDIR, "../../", SETTINGS_JSON["TEST_IMAGES_CLEAN_
 
 if not os.path.exists(FLIP_IMAGES_DIR): os.makedirs(FLIP_IMAGES_DIR)
 
-test_images = glob.glob(os.path.join(TEST_IMAGES_DIR, "*"))[:300]  # debugging 
+test_images = glob.glob(os.path.join(TEST_IMAGES_DIR, "*"))  # debugging 
 
 for index, imgfile in enumerate(test_images): 
     sys.stdout.write("Flipping {}/{} ...\r".format(index+1, len(test_images)))
