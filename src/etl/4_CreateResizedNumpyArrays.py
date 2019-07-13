@@ -58,7 +58,6 @@ def resize_images_and_save_as_nparray(list_of_images, in_dir, out_dir, new_size=
         sys.stdout.flush()
         in_dir= str(in_dir)
         img= img.decode('ascii')
-        print(os.path.join(in_dir, img))
         loaded_img = scipy.misc.imread(os.path.join(in_dir, img), mode="L")
         resized_img = resize_image(loaded_img, new_size) 
         np.save(os.path.join(out_dir, img.replace("png", "npy")), resized_img) 
