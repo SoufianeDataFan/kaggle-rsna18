@@ -17,8 +17,8 @@ with open(os.path.join(WDIR, "../../SETTINGS.json")) as f:
 # SCRIPT #
 ##########
 
-train_dicoms_dir = os.path.join(WDIR, "../../", SETTINGS_JSON["RAW_TRAIN_DICOMS_DIR"])[:100]
-test_dicoms_dir  = os.path.join(WDIR, "../../", SETTINGS_JSON["RAW_TEST_DICOMS_DIR"])[:100]
+train_dicoms_dir = os.path.join(WDIR, "../../", SETTINGS_JSON["RAW_TRAIN_DICOMS_DIR"])
+test_dicoms_dir  = os.path.join(WDIR, "../../", SETTINGS_JSON["RAW_TEST_DICOMS_DIR"])
 
 # list_of_train_dicoms = glob.glob(os.path.join(train_dicoms_dir, "*"))
 # list_of_test_dicoms  = glob.glob(os.path.join(test_dicoms_dir, "*"))
@@ -26,8 +26,8 @@ test_dicoms_dir  = os.path.join(WDIR, "../../", SETTINGS_JSON["RAW_TEST_DICOMS_D
 # DEBUG # 
 ##########
 
-list_of_train_dicoms = glob.glob(os.path.join(train_dicoms_dir, "*")) 
-list_of_test_dicoms  = glob.glob(os.path.join(test_dicoms_dir, "*")) 
+list_of_train_dicoms = glob.glob(os.path.join(train_dicoms_dir, "*"))[:100]
+list_of_test_dicoms  = glob.glob(os.path.join(test_dicoms_dir, "*"))[:100]
 ##########
 
 
